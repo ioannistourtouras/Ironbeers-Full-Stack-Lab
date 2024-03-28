@@ -23,6 +23,17 @@ router.get('/beers/:id', (req, res)=> {
     res.json(err)
   })
 })
+// to write a json obj on a post request on postman we use '' both on keys and values!
+router.post('/beers', (req, res)=> {
+  Beer.create(req.body)
+  .then((beerCreated)=> {
+    console.log(beerCreated)
+    res.json(beerCreated)
+  })
+  .catch((err)=> {
+    res.json(err)
+  })
+})
 
 
 module.exports = router;
