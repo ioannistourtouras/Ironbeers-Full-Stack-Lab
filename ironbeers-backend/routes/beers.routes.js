@@ -4,7 +4,7 @@ const Beer = require('../models/Beer.model')
 router.get("/beers", (req, res) => {
   Beer.find()
   .then((allBeers)=> {
-    console.log(allBeers)
+    console.log(allBeers)    
     res.json(allBeers)
   })
   .catch((err)=> {
@@ -24,6 +24,7 @@ router.get('/beers/:id', (req, res)=> {
   })
 })
 // to write a json obj on a post request on postman we use '' both on keys and values!
+// Strings in JSON must be written in double quotes. {"name":"John"}
 router.post('/beers', (req, res)=> {
   Beer.create(req.body)
   .then((beerCreated)=> {
@@ -35,5 +36,16 @@ router.post('/beers', (req, res)=> {
   })
 })
 
+router.put('/beers/:id', (req, res)=> {
+  
+  Beer.findByIdAndUpdate(req.params.id, req.body,{new:true})
+  .then((updatedBeer)=> {
+    console.log(updatedBeer)
+    res.json(updatedBeer)
+  })
+  .catch((err)=> {
+    res.json(err)
+  })
+})
 
 module.exports = router;
