@@ -48,4 +48,14 @@ router.put('/beers/:id', (req, res)=> {
   })
 })
 
+router.delete('/beers/:id', (req, res)=> {
+  Beer.findByIdAndDelete(req.params.id)
+  .then((deletedBeer)=> {
+    res.json({message: `Beer ${deletedBeer.name} succesfully deleted`})
+  })
+  .catch((err)=> {
+    res.json(err)
+  })
+})
+
 module.exports = router;
